@@ -1,0 +1,494 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Skills-Javascript</title>
+  <script src="https://code.jquery.com/jquery.js"></script>
+  
+  <style>
+    body {
+      counter-reset: h3counter;
+      font-family: sans-serif;
+    }
+    input[type=button],
+    input[type=submit],
+    button {
+      padding: 0.5em;
+      background-color: powderblue;
+      border-radius: 10px;
+    }
+    fieldset {
+      border-color: #ccc;
+      box-shadow: 3px 3px 8px #ccc;
+      margin: 2em 1em;
+    }
+    h2 {
+      margin-top: 5em;
+      font-size: 200%;
+    }
+    h3 {
+      margin-top: 4em;
+    }
+    h3:before {
+      counter-increment: h3counter;
+      content: counter(h3counter) ". ";
+    }
+    .hint {
+      border: dashed 1px black;
+      margin: 1em 0;
+      padding: 1em;
+    }
+    .hint:before {
+      font-style: italic;
+      content: "Hint -- hover to reveal";
+    }
+    .hint > div {
+      color: white;
+      padding-top: 1em;
+    }
+    .hint > div:hover {
+      color: black;
+    }
+    .prime-box {
+      color: white;
+      text-shadow: 2px 2px 3px black;
+      border-radius: 50%;
+      box-shadow: 3px 3px 10px #666;
+      width: 3em;
+      padding: 1em 0;
+      text-align: center;
+      font-size: 200%;
+      font-family: sans-serif;
+      display: inline-block;
+      margin-right: 1em;
+    }
+  </style>
+  
+</head>
+<body>
+
+<h1>Skills&mdash;Javascript</h1>
+<p>
+  For each numbered problem, fill in the corresponding <code>&lt;script&gt;</code> section in the
+  source with Javascript to solve the problem.</p>
+<p>
+  <b>Note:</b> you should only add Javascript; you cannot change the HTML otherwise <b>at all</b>.
+</p>
+
+<img src="http://cdn.meme.am/instances/500x/58307737.jpg">
+
+
+
+
+
+
+<h2>Plain Javacript</h2>
+<p>You may not use jQuery for this section!</p>
+
+
+
+
+
+<h3>Making an Event Handler</h3>
+<p>
+  Make this button pop up an alert box in the
+  browser window.
+</p>
+
+<fieldset>
+<input type="button" value="Show Me a Popup!" id="popup-alert-button">
+</fieldset>
+
+<script>
+  // code here for above problem
+  document.getElementById("popup-alert-button").addEventListener("click",function () {alert("This is a popup!");});
+</script>
+
+
+
+
+
+<h3>Manipulating the DOM</h3>
+<p>Change the word "hello" to "goodbye" when the button is pressed.</p>
+<p>(Don't get rid of the italics tag itself, though!)</p>
+
+<fieldset>
+  <i id="message-to-change">hello</i>
+  <button id="change-hello-to-goodbye-button">Turn <b>Hello</b> Into <b>Goodbye</b></button>
+  <!-- Hey, look, that was another way to do a button - what might it be good for? -->
+</fieldset>
+
+<script>
+  // code here for above-problem
+  document.getElementById("change-hello-to-goodbye-button").addEventListener("click",function () {document.getElementById("message-to-change").innerText="Goodbye";});
+</script>
+
+<div class="hint">
+  <div>
+    Don't know or don't remember how to change the text of an element you find in Javascript?
+    That's what the <code>console.dir(object)</code> feature is so useful for&mdash;it gives
+    you the complete list of properties/methods on an object!
+  </div>
+</div>
+
+
+
+
+
+<h3>Preventing Form Submission</h3>
+<p>
+  Normally, for this form, it submits to <code>some-script</code>. Make it pop up an
+  alert box instead.
+</p>
+
+<fieldset>
+  <form action="some-script" id="prevent-form-submission-form">
+    <input type="text" name="favorite-color" id="favorite-color-field">
+    <input type="submit" id="prevent-form-submission-button" value="Just an Alert, Please!">
+  </form>
+</fieldset>
+
+<script>
+  // code here for above problem
+  document.getElementById("prevent-form-submission-button").addEventListener("click",preventSubmit);
+  
+  function preventSubmit(){
+    event.preventDefault();
+    alert("This is a pop up alert box");
+    }
+
+</script>
+
+<div class="hint">
+  <div>
+    Did you prevent the form submission by catching the button click?
+    What happens if you go into the text field and press ENTER? Is there a way you
+    can catch both with only one event listener?
+  </div>
+</div>
+
+
+
+
+
+
+
+<h3>Reversing a String</h3>
+<p>
+  There's some incomplete Javascript code below. When the button is pushed, it pops up an
+  alert box with a message. Reverse the order of the message, so "Porcupines are cute" would
+  become "etuc era senipucroP". You must do this reversal programmatically; you cannot just
+  type in the reversed string yourself!
+</p>
+
+<fieldset>
+  <input type="button" id="reverse-string-button" value="!nottuB">
+</fieldset>
+
+<script>
+//  Here's a stub of a function you can use!
+    
+    var msg = "Porcupines are cute";
+    
+    function reverseString() {
+        var newMsg = "";
+        for (var i = (msg.length - 1); i >= 0 ; i--){
+            newMsg = newMsg + msg[i];}
+        return newMsg;
+        }
+        
+//    // do some stuff here to reverse that string into a new variable
+    var newMsg = reverseString();
+  
+    var button = document.getElementById('reverse-string-button');
+    button.addEventListener('click', function() {alert(newMsg);});
+</script>
+
+
+
+
+
+
+<h2>jQuery</h2>
+<p>You should use jQuery for these parts.</p>
+<p>We didn't include jQuery in this document, though&mdash;so your first task is to include it!</p>
+
+
+
+<h3>Finding the Button</h3>
+<p>
+  When you click this button, pop up an alert box. <b>Remember, you cannot change the HTML!</b>
+</p>
+
+<fieldset>
+  <input type="button" class="tricky-to-find" value="Pop-Up Please!">
+</fieldset>
+
+<script>
+  // code here for above problem
+
+$(".tricky-to-find").on("click",function() {alert("Here is a popup");});
+
+</script>
+
+<div class="hint">
+  <div>
+    You can find things by class name&mdash;but then you get back an array.
+  </div>
+</div>
+
+
+
+
+
+<h3>Down with Cats!</h3>
+<p>
+  After complaints from Cynthia about our cat-centered curriculum, you now need to change
+  the following image of a cat to one of a dog when you double-click on the cat
+  (you can Google for any cute dog photo you
+  want). Do this in jQuery.
+</p>
+
+<fieldset>
+  <img src="http://www.wallspick.com/wp-content/uploads/2014/12/Grey-Eyes-Cute-Cat-640x400.jpg"
+       alt="Adorbz" id="kittenz-rule">
+</fieldset>
+
+<script>
+  // put your code here
+  $("#kittenz-rule").on("dblclick",function() {$("#kittenz-rule").attr("src","data:image/jpeg;base64,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");});
+  
+</script>
+
+<div class="hint">
+  <div>
+    How do you change an attribute with jQuery?
+  </div>
+</div>
+
+
+
+
+
+<h3>Slowly Make a Porcupine</h3>
+<p>
+  After complaints from Joel about the lack of cute porcupines in our exercises,
+  you're now tasked with having a cute porcupine appear when the button is pushed.
+</p>
+<p>However:</p>
+<ul>
+  <li>You must pause one second after the button is pushed for the image to appear</li>
+  <li>You should use a jQuery appear-via-animation method for this to appear. You can
+  try things like <code>fadeIn</code> or <code>slideDown</code>. For extra points, can you
+  make this animate itself happen slowly?</li>
+</ul>
+
+<fieldset>
+  <img src="http://mytrial.typepad.com/.a/6a0147e199a17d970b0153906b3209970b-pi"
+      id="cute-porcupine-image" style="display: none">
+  <input type="button" id="make-a-porcupine" value="I Want a Porcupine!">
+</fieldset>
+
+<script>
+  // put your code here
+  
+  function showPorcupine(){
+        $("#cute-porcupine-image").fadeIn();
+        }
+  
+  $("#make-a-porcupine").on("click",function() {setTimeout(showPorcupine,1000);});
+  
+</script>
+
+<div class="hint">
+  <div>
+    You can make things happen after a second with <code>setTimeout</code>, a function
+    Javascript can always use when inside a browser.
+  </div>
+</div>
+
+
+
+
+
+<h3>An Agreeable Form</h3>
+<p>
+  When the user submits the form below, it should fill in the div to agree with the
+  user. So if I saw my favorite food is "pretzels", a message should appear in that div
+  that says "I like pretzels, too."
+</p>
+
+<fieldset>
+  <form action="/oh-no-do-not-go-here" id="agreeable-form">
+    What's your favorite food?
+    <input type="text" name="favorite-food" required
+           id="favorite-food-input">
+    <input type="submit" value="I'm Very Agreeable">
+  </form>
+  <div id="agreeable-text"></div>
+</fieldset>
+
+<script>
+  // put your code here
+  
+  $(":submit").on("click",function () {$("fieldset div").html($("#favorite-food-input").val());event.preventDefault();});
+</script>
+
+<div class="hint">
+  <div>
+    You're right&mdash;we didn't show you how to find the current value in an input field
+    using jQuery. Thank goodness for <code>console.dir(object)</code> or StackOverflow!
+  </div>
+</div>
+
+
+
+
+
+
+<h2>Advanced!</h2>
+<p>
+  Hey, we know you're smart and becoming a Javascript ninja. So we've given you these
+  exercises which are, frankly, really tough. Don't feel badly if you need to practice the
+  above a few times first, or need to get some hints or help here. They're trickier and
+  definitely take much longer.
+</p>
+<p>You can either do these with or without jQuery, as you please.</p>
+<p>But, really, these are <blink>hard</blink>.</p>
+
+
+
+
+<h3>Number-Guessing Game</h3>
+<p>
+  Make the classic "guess-a-number-between-1-and-100" in Javascript.
+</p>
+<p>
+  The user starts the game by clicking the button.
+  This should then guess a random integer from 1 to 100 (StackOverflow is probably helpful here!).
+  It should then keep popping up a Javascript <code>prompt</code> box to ask for a number.
+  If you guess too high or too low, pop up an alert to say so. When the user gets the right
+  number, congratulate them in an alert box, and then stop prompting them for numbers (well,
+  at least until they press the button again!)
+</p>
+
+<fieldset>
+  <input type="button" id="play-guessing-game" value="Play!">
+</fieldset>
+
+<script>
+  // put your code here
+</script>
+
+<div class="hint">
+  <div>
+    How do you turn the string "42" into the integer 42 in Javascript? I'll bet
+    StackOverflow knows!
+  </div>
+</div>
+
+
+
+
+
+
+<h3>Less Annoying Number-Guessing Game</h3>
+<p>
+  That was fun! But, wow, all those alerts and prompts are annoying, aren't they?
+</p>
+<p>
+  Write a new version that uses a simple form field for the number, and outputs the
+  too-high/too-low/just-right into the div next to it.
+</p>
+<p>
+  The game should start when they press the play button. Until they guess the right number,
+  though, that button should no longer work again. Similarly, the numbered-guessed field
+  and try-this-number button shouldn't be enabled if they're not playing. Tricky!
+</p>
+
+<fieldset>
+  <input type="button" id="play-guessing-game-2" value="Play!">
+  <form action="do-not-go-here" id="guessing-game-2-form">
+    <input id="number-guessed" name="number-guessed" type="number" placeholder="Guess" disabled>
+    <!-- hey! go read MDN about the "number" input type. Cool, huh? -->
+    <input type="submit" id="try-this-number" value="Guess" disabled>
+    <div id="number-guessing-msg"></div>
+  </form>
+</fieldset>
+
+<script>
+  // put your code here
+</script>
+
+
+
+
+<h3>Five Colored Primes</h3>
+<p>
+  When the button is pushed, five new boxes should appear in the bordered area.
+  (A prime number is an integer greater than 1 which cannot be divided evenly by any other
+  number other than itself and 1. For example, 11 is prime (you can only divide it by 1 and 11),
+  while 12 is not (you can divide it evenly by 2, 3, 4, and 6, along with 1 and 12).
+</p>
+<p>
+  Each box should contain the text of the next prime number. Each box should have a different
+  color, chosen from the list of colors in the Javascript. You can re-use our <code>prime-box</code>
+  class to make your numbers look like ours, if you want (or feel free to experiment with other
+  CSS).
+</p>
+<p>This should look like:</p>
+<div>
+  <div class="prime-box" style="background-color: orange">2</div>
+  <div class="prime-box" style="background-color: midnightblue">3</div>
+  <div class="prime-box" style="background-color: darkgoldenrod">5</div>
+  <div class="prime-box" style="background-color: green">7</div>
+  <div class="prime-box" style="background-color: purple">11</div>
+</div>
+<p>You must calculate the prime numbers; you cannot just type them in.</p>
+
+<fieldset>
+  <div id="prime-box-area"><!-- Your prime boxes should appear here! --></div>
+  <input type="button" id="make-prime-boxes" value="Button">
+</fieldset>
+
+<script>
+    var PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
+
+  // put the rest of your code here
+</script>
+
+
+
+
+
+<h3>CSS Stuff</h3>
+<p>
+  This isn't so much of an exercise, but those of you interested in more intermediate/complex
+  CSS, take a look at the CSS we use on this page&mdash;it shows off some interesting pseudo-selectors
+  like <code>:before</code> and uses things like CSS numbering. Neat stuff.
+</p>
+
+
+
+
+
+<script>
+  // Blink text FTW!
+
+  var blinkies = document.getElementsByTagName("blink");
+
+  function blink() {
+    for (var i = 0; i < blinkies.length; i++) {
+      var item = blinkies[i];
+      if (item.style.color == 'white') {
+        item.style.color = 'black';
+      } else {
+        item.style.color = 'white';
+      }
+    }
+  }
+  setInterval(blink, 500);
+</script>
+
+</body>
+</html>
