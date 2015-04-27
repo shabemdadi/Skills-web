@@ -331,7 +331,7 @@ $(".tricky-to-find").on("click",function() {alert("Here is a popup");});
 <script>
   // put your code here
   
-  $(":submit").on("click",function () {$("fieldset div").html($("#favorite-food-input").val());event.preventDefault();});
+  $(":submit").on("click",function () {$("#agreeable-text").html("I like " + $("#favorite-food-input").val() + ", too");event.preventDefault();});
 </script>
 
 <div class="hint">
@@ -378,6 +378,26 @@ $(".tricky-to-find").on("click",function() {alert("Here is a popup");});
 
 <script>
   // put your code here
+     function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+        }
+        
+  function guessingGame(){
+    var number = getRandomInt(1,100);
+    var guess = prompt("Guess a number between 1 and 100!");
+    var playing = true;
+    while (playing){
+        if (guess < number){
+            guess = prompt("Too low! Guess again!");}
+        else if (guess > number) {
+            guess = prompt("Too high! Guess again!");}
+        else {
+            alert("Congratulations! You guessed correctly!");
+            playing = false;}
+    }
+  }
+  
+  $("#play-guessing-game").on("click",guessingGame)
 </script>
 
 <div class="hint">
@@ -418,6 +438,38 @@ $(".tricky-to-find").on("click",function() {alert("Here is a popup");});
 
 <script>
   // put your code here
+function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+        }
+ 
+var number;
+    
+function guessingGame(){
+    $("#number-guessed").removeAttr("disabled");
+    $("#try-this-number").removeAttr("disabled");
+    $("#play-guessing-game-2").prop("disabled","disabled");
+    $("#try-this-number").on("click",playing);
+    number = getRandomInt(1,100);
+  }
+    
+function playing(){
+    var guess = $("#number-guessed").val();
+    event.preventDefault();
+    if (guess < number){
+        $("#number-guessing-msg").html("Too low! Guess again!");}
+    else if (guess > number) {
+        $("#number-guessing-msg").html("Too high! Guess again!");}
+    else {
+        $("#number-guessing-msg").html("Congratulations! You guessed correctly!");
+        playing = false;
+        $("#number-guessed").prop("disabled","disabled");
+        $("#try-this-number").prop("disabled","disabled");
+        $("#play-guessing-game-2").removeAttr("disabled");
+        }
+    }
+  
+  $("#play-guessing-game-2").on("click",guessingGame)
+  
 </script>
 
 
@@ -454,7 +506,36 @@ $(".tricky-to-find").on("click",function() {alert("Here is a popup");});
 <script>
     var PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
 
-  // put the rest of your code here
+function getPrimes(start,stop){
+    var primes = [];
+    for (var counter = start; counter <= stop; counter++) {
+
+        var notPrime = false;
+        for (var i = 2; i <= counter; i++) {
+            if (counter%i===0 && i!==counter) {
+                notPrime = true;
+            }
+        }
+        if (notPrime === false) {
+                    primes.push(counter);
+        }
+    }
+    return(primes);
+}
+
+ function makePrimeBoxes(){
+    for (var i = 0; i < 5; i++){
+        $("#prime-box-area").append("<div>")
+    }
+    
+    $("#prime-box-area div").each(function( i ) {
+        $(this).attr("style","background-color: " + PRIME_COLORS[i])
+        $(this).html(getPrimes(12,100)[i])
+        $(this).addClass("prime-box")
+    })
+ }
+ 
+  $("#make-prime-boxes").on("click",makePrimeBoxes)
 </script>
 
 
